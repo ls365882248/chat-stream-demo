@@ -12,6 +12,10 @@ app.get('/', function (req, res) {
   res.send('Hello World')
 })
 
+app.post('/stream', async (req, res) => {
+  sse.init(req, res);
+});
+
 app.get('/stream', async (req, res) => {
   sse.init(req, res);
 });

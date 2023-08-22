@@ -1,7 +1,7 @@
 import  { fetchEventSource } from '@microsoft/fetch-event-source';
 
 
-const addMessage = async (content) => {
+const getMessage = async (content) => {
   const element = document.getElementById('stream');
   await fetchEventSource('http://localhost:3000/stream', {
     onmessage(ev) {
@@ -10,6 +10,17 @@ const addMessage = async (content) => {
   });
 };
 
-addMessage('hello');
+const postMessage = async (content) => {
+  const element = document.getElementById('post-stream');
+  await fetchEventSource('http://localhost:3000/stream', {
+    method: 'POST',
+    onmessage(ev) {
+      element.innerHTML += (ev.data + '<br>')
+    }
+  });
+};
+
+getMessage('hello');
+postMessage('world')
 
 
